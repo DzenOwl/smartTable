@@ -54,8 +54,9 @@ class PoseDetector:
                     cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
         return lmList
 
+
 def main():
-    path = '../src/9.mp4'
+    path = '../src/2021-10-16 09-41-39.mkv'
     cap = cv2.VideoCapture(path)
     pTime = 0
     detector = PoseDetector()
