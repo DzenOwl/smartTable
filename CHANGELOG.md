@@ -21,7 +21,7 @@
 - найдена готовая реализация сравнения точек в OpenCV через библиотеку TensorFlow [Статья](https://medium.com/analytics-vidhya/human-pose-comparison-and-action-scoring-using-deep-learning-opencv-python-c2bdf0ddecba)
 - отсняты и размечены видео (фронтальную съёмку надо переделывать)
 ![sprint2_down](./main/photos/optional/sprint2_down.png?raw=true "sprint2_down")
-![sprint2_up](./main/photos/optional/sprint2_up.png?raw=true "sprint2_up")
+![sprint2_up](./main/photos/optional/sprint2_up.jpg?raw=true "sprint2_up")
 
 ### v0.1
 - опробованы библиотеки OpenCV и mediapipe на коротких видео
