@@ -56,7 +56,7 @@ class PoseDetector:
 
 
 def main():
-    path = '../src/2021-10-16 09-41-39.mkv'
+    path = '../src/1.mp4'
     cap = cv2.VideoCapture(path)
     pTime = 0
     detector = PoseDetector()
@@ -64,8 +64,8 @@ def main():
     while True:
         success, img = cap.read()
         img = detector.findPose(img)
-        # lmList = detector.getPosition(img)
-        # print(lmList)
+        lmList = detector.getPosition(img)
+        print(lmList)
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
