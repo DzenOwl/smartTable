@@ -1,6 +1,7 @@
 import cv2
 import mediapipe as mp
 import time
+import pandas as pd
 
 
 class PoseDetector:
@@ -30,15 +31,20 @@ class PoseDetector:
             self.upBody,
             self.smooth,
             self.detectionCon,
-            self.trackCon)
+            self.trackCon
+        )
 
     def findPose(self, img, draw=True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         self.results = self.pose.process(imgRGB)
-        #print(results.pose_landmarks)
+        # print(self.results.pose_landmarks)
         if self.results.pose_landmarks:
             if draw:
-                self.mpDraw.draw_landmarks(img, self.results.pose_landmarks, self.mpPose.POSE_CONNECTIONS)
+                self.mpDraw.draw_landmarks(
+                    img,
+                    self.results.pose_landmarks,
+                    self.mpPose.POSE_CONNECTIONS,
+                    landmark_drawing_spec=mp.solutions.drawing_styles.get_default_pose_landmarks_style())
 
         return img
 
@@ -47,12 +53,14 @@ class PoseDetector:
         if self.results.pose_landmarks:
             for id, lm in enumerate(self.results.pose_landmarks.landmark):
                 h, w, c = img.shape
-                #print(id, lm)
+                # print(id, lm)
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 lmList.append([id, cx, cy])
                 if draw:
                     cv2.circle(img, (cx, cy), 5, (255, 0, 0), cv2.FILLED)
         return lmList
+
+# def compare_poses(pose_1, pose_2):
 
 
 def main():
@@ -60,12 +68,19 @@ def main():
     cap = cv2.VideoCapture(path)
     pTime = 0
     detector = PoseDetector()
+    img_labels = []
+    img_poses = []
+    counter = 1
+    img_shape = ()
 
     while True:
         success, img = cap.read()
+        if img is None:
+            break
         img = detector.findPose(img)
+        img_shape = img.shape
         lmList = detector.getPosition(img)
-        print(lmList)
+        # print(lmList)
 
         cTime = time.time()
         fps = 1 / (cTime - pTime)
@@ -81,7 +96,18 @@ def main():
             3                           # the thickness of the line in px
         )
         cv2.imshow("Image", img)
+
+        # cv2.imwrite(f'./imgs/img_{counter:05d}.png', img)
+        # img_labels.append(f'img_{counter:05d}.png')
+        # img_poses.append(lmList)
+
         cv2.waitKey(1)
+        counter = counter + 1
+        # print(counter)
+
+    # df = pd.DataFrame(data={'images': img_labels, 'coordinates': img_poses})
+    # df.to_csv('./video_df.csv', sep=' ', encoding='utf-8')
+    print(img_shape)
 
 
 if __name__ == "__main__":
