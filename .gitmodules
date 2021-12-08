@@ -1,0 +1,6 @@
+[submodule "main/py/main/py/openpose"]
+	path = main/py/main/py/openpose
+	url = https://github.com/CMU-Perceptual-Computing-Lab/openpose
+[submodule "main/py/main/py/Human-Pose-Compare"]
+	path = main/py/main/py/Human-Pose-Compare
+	url = https://github.com/kr1210/Human-Pose-Compare.git

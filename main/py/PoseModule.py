@@ -64,7 +64,7 @@ class PoseDetector:
 
 
 def main():
-    path = '../src/1.mp4'
+    path = '../src/position.jpg'
     cap = cv2.VideoCapture(path)
     pTime = 0
     detector = PoseDetector()
@@ -96,8 +96,7 @@ def main():
             3                           # the thickness of the line in px
         )
         cv2.imshow("Image", img)
-
-        # cv2.imwrite(f'./imgs/img_{counter:05d}.png', img)
+        cv2.imwrite(f'./img_{counter:05d}.png', img)
         # img_labels.append(f'img_{counter:05d}.png')
         # img_poses.append(lmList)
 
