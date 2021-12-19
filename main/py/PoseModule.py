@@ -64,7 +64,7 @@ class PoseDetector:
 
 
 def main():
-    path = '../src/position.jpg'
+    path = '../src/videos/smartTable/10.mp4'
     cap = cv2.VideoCapture(path)
     pTime = 0
     detector = PoseDetector()
@@ -97,15 +97,15 @@ def main():
         )
         cv2.imshow("Image", img)
         cv2.imwrite(f'./img_{counter:05d}.png', img)
-        # img_labels.append(f'img_{counter:05d}.png')
-        # img_poses.append(lmList)
+        img_labels.append(f'img_{counter:05d}.png')
+        img_poses.append(lmList)
 
         cv2.waitKey(1)
         counter = counter + 1
         # print(counter)
 
-    # df = pd.DataFrame(data={'images': img_labels, 'coordinates': img_poses})
-    # df.to_csv('./video_df.csv', sep=' ', encoding='utf-8')
+    df = pd.DataFrame(data={'images': img_labels, 'coordinates': img_poses})
+    df.to_csv('./video_df.csv', sep=' ', encoding='utf-8')
     print(img_shape)
 
 
